@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: taller
+      POSTGRES_USER: taller
+      POSTGRES_PASSWORD: taller_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - taller-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U taller -d taller"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: .
+      dockerfile: src/Taller.Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Taller: "Host=db;Port=5432;Database=taller;Username=taller;Password=taller_dev"
+    ports:
+      - "5080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+
+volumes:
+  taller-db:

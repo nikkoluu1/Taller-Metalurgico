@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Taller.Api/Taller.Api.csproj" />
+    <Project Path="src/Taller.Application/Taller.Application.csproj" />
+    <Project Path="src/Taller.Domain/Taller.Domain.csproj" />
+    <Project Path="src/Taller.Infrastructure/Taller.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Taller.Api.IntegrationTests/Taller.Api.IntegrationTests.csproj" />
+    <Project Path="tests/Taller.Domain.Tests/Taller.Domain.Tests.csproj" />
+  </Folder>
+</Solution>
